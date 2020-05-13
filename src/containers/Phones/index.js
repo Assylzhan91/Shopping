@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 
-import {fetchPhones} from "../../actions";
+import {fetchPhones} from "actions"
 
 
 
@@ -9,6 +9,7 @@ class  App extends  Component{
   
   componentDidMount() {
     this.props.fetchPhones()
+
   }
 
   render() {
@@ -20,11 +21,8 @@ class  App extends  Component{
   }
 }
 
-const mapStateToProps = ({phones})=>{
-  
-  return {
-   phones: phones.phoneList
-  }
+const mapStateToProps = (state)=>{
+  return { phones:  state.phones}
 }
 const mapDispatchToProps = (dispatch)=>{
   return {

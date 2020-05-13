@@ -14,7 +14,7 @@ export function fetchPhones(){
     try {
       const phones = await fetchPhonesApi()
       
-      dispatch(fetchPhonesSuccess(phones)) 
+      dispatch(fetchPhonesSuccess(phones))
     }
     catch (err) {
       dispatch(fetchPhonesFailure(err, true))
@@ -23,7 +23,7 @@ export function fetchPhones(){
 }
 
 
-export function fetchPhonesStart(phones) {
+export function fetchPhonesStart() {
   return {  
     type: FETCH_PHONES_START
   }
