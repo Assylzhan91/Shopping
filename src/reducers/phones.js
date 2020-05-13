@@ -10,7 +10,6 @@ export default (state = initialState, {type, payload})=>{
   switch (type) {
     case FETCH_PHONES_SUCCESS:
       let newValues = R.indexBy(R.prop('id'), payload)
-      console.log(payload)
       return R.merge(state, newValues)
       
     default: 

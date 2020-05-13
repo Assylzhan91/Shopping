@@ -33,6 +33,9 @@ h5, a {
   list-style: none;
   text-decoration: none;
 }
+a:hover {
+  text-decoration: none;
+}
 
 html {
   font-size: 15px;
@@ -574,19 +577,4 @@ footer {
   -o-transform: translateY(0px);
   -ms-transform: translateY(0px);
   transform: translateY(0px);
-}
-
-
- .message-ball {
-   font-size: 20px;
-   line-height: 200px;
-   text-align: center;
- }
-.circle {
-  transition-property: width, height, margin-left, margin-top;
-  transition-duration: 2s;
-  position: fixed;
-  transform: translateX(-50%) translateY(-50%);
-  background-color: red;
-  border-radius: 50%;
 }
