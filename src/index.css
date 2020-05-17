@@ -261,6 +261,11 @@ html {
 .well{
   border-radius: 0 0 4px 4px;
 }
+
+.well input.form-control{
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
 .open>.dropdown-menu{
   min-width: 100%;
   z-index: 1001;

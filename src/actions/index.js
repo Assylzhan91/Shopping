@@ -9,7 +9,8 @@ import {
   FETCH_PHONE_BY_ID_SUCCESS,
   FETCH_PHONE_BY_ID_FAILURE,
   IS_RESIZE_MOBILE_WIDTH,
-  ADD_PHONE_TO_BASKET
+  ADD_PHONE_TO_BASKET,
+  SEARCH_PHONE
 } from "./actionTypes"
 
 import {
@@ -44,6 +45,7 @@ export function fetchPhones(){
     }
   }
 }
+
 
 export function loadMorePhones(){
   return  async (dispatch, getState)=>{
@@ -98,7 +100,6 @@ export function fetchPhoneById(id){
 }
 
 
-
 export function heightAuto(width){
   return  dispatch => {
     let localVar = false
@@ -118,3 +119,8 @@ export function addPhoneToBasket(id){
 }
 
 
+export function searchPhone(value){
+  return  dispatch => (
+    dispatch({type: SEARCH_PHONE, payload: value})
+  )
+}

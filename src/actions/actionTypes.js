@@ -3,6 +3,7 @@ export const  FETCH_PHONES_SUCCESS = 'FETCH_PHONES_SUCCESS'
 export const  FETCH_PHONES_FAILURE = 'FETCH_PHONES_FAILURE'
 
 /*=========================================================================*/
+
 export const LOAD_MORE_PHONES_START = 'LOAD_MORE_PHONES_START'
 export const LOAD_MORE_PHONES_SUCCESS = 'LOAD_MORE_PHONES_SUCCESS'
 export const LOAD_MORE_PHONES_FAILURE = 'LOAD_MORE_PHONES_FAILURE'
@@ -19,7 +20,13 @@ export const IS_RESIZE_MOBILE_WIDTH = 'IS_RESIZE_MOBILE_WIDTH'
 
 /*=========================================================================*/
 
-  export const ADD_PHONE_TO_BASKET = 'ADD_PHONE_TO_BASKET'
+export const ADD_PHONE_TO_BASKET = 'ADD_PHONE_TO_BASKET'
+
+/*=========================================================================*/
+
+export const SEARCH_PHONE = 'SEARCH_PHONE'
+
+/*=========================================================================*/
 
 
 
