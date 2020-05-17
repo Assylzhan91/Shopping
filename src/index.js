@@ -6,7 +6,8 @@ import {Provider} from 'react-redux'
 import {routerMiddleware, ConnectedRouter} from "connected-react-router"
 import thunk from 'redux-thunk'
 import createRootReducer from 'reducers/rootReducer'
-import Layout from 'containers/Layout'
+
+import routes from 'routes'
 import {composeWithDevTools} from "redux-devtools-extension"
 import 'index.css'
 
@@ -22,7 +23,7 @@ const store = createStore(
 render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <Layout />  
+      {routes}
     </ConnectedRouter>
   </Provider>,
   document.getElementById('root'),

@@ -1,26 +1,35 @@
 import React, {Component} from 'react'
-import {Row, Col, Button, Image, Figure } from 'react-bootstrap'
 import {Link} from 'react-router-dom'
+import Layout from 'containers/Layout'
 import {connect} from 'react-redux'
 import * as R from 'ramda'
+import {Row, Col, Button, Figure} from 'react-bootstrap'
 
-import {fetchPhones} from "actions"
+import style from './phones.module.scss'
+
+import {fetchPhones, loadMorePhones, heightAuto, addPhoneToBasket} from "actions"
 import {getPhones} from "selectors/selectors"
 
 
 
+
 class  App extends  Component{
-  
+
   componentDidMount() {
     this.props.fetchPhones()
+    window.addEventListener('resize', ()=> this.props.heightAuto(575))
+ 
 
+    this.props.heightAuto(575)
   }
   
   renderPhone(phone, idx){
     const shortDecription = `${R.take(55, phone.description)}...`
+    const {addPhoneToBasket} = this.props
+    
     return (
-      <Col md={4} lg={4} sm={4} className="book-list">
-        <Figure className='thumbnail'>
+    <Col md={4} lg={4} sm={4} className={`book-list d-flex flex-column`} key={idx}>
+        <Figure className={`thumbnail d-flex flex-column`}>
           <Figure.Image
             src={phone.image} 
             thumbnail 
@@ -34,8 +43,10 @@ class  App extends  Component{
               </Link>
             </h4>
             <p>{shortDecription}</p>
-            <div className="btn-wrapper d-flex">
-              <Button variant="outline-warning">
+            <div className="btn-wrapper d-flex buttons">
+              <Button 
+                onClick={()=> addPhoneToBasket(phone.id)}
+                variant="outline-warning">
                 Buy now
               </Button>
               
@@ -54,27 +65,42 @@ class  App extends  Component{
   }
   
   render() {
-    let  {phones} = this.props
+    let  {phones, loadMorePhones, isMobileWidth} = this.props
+    const cls = ['books']
+      if(isMobileWidth){
+        cls.push(style.item)
+      }
     return (
-      <Row className="books">
-        {
-          phones.map((phone, idx)=> this.renderPhone(phone, idx))
-        }
-      </Row>
+      <Layout>
+        <Row className={cls.join(' ')}>
+          {
+            phones.map((phone, idx)=> this.renderPhone(phone, idx))
+          }
+        </Row>
+        <Row>
+          <Col md={12}>
+            <Button onClick={loadMorePhones}>
+              Load more
+            </Button>
+          </Col>
+        </Row>
+      </Layout>
     )
   }
 }
 
 const mapStateToProps = (state)=>{
   return { 
-    phones: getPhones(state)
+    phones: getPhones(state),
+    isMobileWidth: state.phones.isMobileWidth
   }
 }
-const mapDispatchToProps = (dispatch)=>{
-  return {
-    fetchPhones: () => dispatch(fetchPhones())
-  }
-}
+const mapDispatchToProps = ({
+  fetchPhones,
+  loadMorePhones,
+  heightAuto,
+  addPhoneToBasket
+})
 
 
 

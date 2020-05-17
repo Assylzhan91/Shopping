@@ -51,6 +51,14 @@ html {
   z-index: 100500;
 }
 
+.sidebar{
+  
+}
+
+.buttons{
+  margin-top: auto;
+}
+
 #page-preloader .spinner {
   width: 64px;
   height: 64px;
@@ -82,9 +90,17 @@ html {
 
 .book-list figure {
   position: relative;
+  height: 100%;
 }
 .book-list .thumbnail img{
   width:100%;
+}
+
+.figure-caption{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-height: 100%;
 }
 .book-list figure::before {
   position: absolute;
@@ -239,9 +255,8 @@ html {
   cursor: pointer;
 }
 .books .book-list{
-  display: inline-block;
-  float: none;
-  vertical-align: top;
+  margin-bottom: 20px;
+  
 }
 .well{
   border-radius: 0 0 4px 4px;
@@ -401,7 +416,7 @@ nav.navbar-inverse .navbar-nav>li>a:hover,nav.navbar-inverse .navbar-nav>li>a.Ac
   display: block;
 }
 .column{
-  border-bottom:1px dashed #E5E5E5;
+  border-bottom:1px dashed #bcbbbb;
   clear:both;
   overflow: hidden;
 }
