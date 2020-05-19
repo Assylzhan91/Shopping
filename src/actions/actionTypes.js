@@ -39,3 +39,6 @@ export const REMOVE_ITEM_FROM_BASKET = 'REMOVE_ITEM_FROM_BASKET'
 
 /*=========================================================================*/
 
+export const CLEAN_BASKET = 'CLEAN_BASKET'
+
+/*=========================================================================*/

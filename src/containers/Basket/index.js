@@ -1,6 +1,7 @@
 import React from 'react'
-import {Container, Row, Col, Table, Image} from 'react-bootstrap'
+import {Container, Row, Col, Table, Image, Button} from 'react-bootstrap'
 import {Icon, Intent} from '@blueprintjs/core'
+import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import styles from './basket.module.scss'
 
@@ -9,11 +10,21 @@ import {
   getBasketPhonesWithCount,
   getTotalBasketPrice
 } from 'selectors/selectors'
-import {removeItemFromBasket} from "actions"
+import {
+  removeItemFromBasket, 
+  cleanBasket, 
+  basketCheckout
+} from "actions"
 
 
 
-const Basket = ({phones, totalPrice, removeItemFromBasket}) => {
+const Basket = ({
+  phones, 
+  totalPrice, 
+  removeItemFromBasket, 
+  cleanBasket, 
+  basketCheckout
+}) => {
   const isBasketEmpty = phones.length === 0
   const renderContent = ()=>(
     <div>
@@ -60,12 +71,36 @@ const Basket = ({phones, totalPrice, removeItemFromBasket}) => {
   )
   
   const renderSidebar = ()=>(
-    <div>Sidebar</div>
+    <div>
+        <Link to={'/'} className = 'btn btn-info mb-2'>
+          <Icon
+            icon='info-sign'
+          />
+          {'  '}
+          <span>Continue shopping</span>
+        </Link>
+      
+      {!isBasketEmpty && <>
+        <Button variant='danger' onClick={cleanBasket} className='mb-2'>
+          <Icon
+            icon='trash'
+          />{'  '}
+          Clean cart
+        </Button>
+        <Button variant='success' onClick={()=>basketCheckout(phones)} className='mb-2'>
+          <Icon
+            icon='envelope'
+          />
+          {'  '}
+          Checkout
+        </Button>
+      </>}
+    </div>
   )
   return (
     <div className='view-container'>
       <Container>
-        <Row>
+        <Row className='mt-3'>
           <Col md={9}>
             {renderContent()}
           </Col>
@@ -88,7 +123,9 @@ const mapStateToProps = state =>{
 }
 
 const mapDispatchToProps ={
-  removeItemFromBasket
+  removeItemFromBasket,
+  cleanBasket,
+  basketCheckout
 }
 
 

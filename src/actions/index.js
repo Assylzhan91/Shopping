@@ -13,9 +13,10 @@ import {
   SEARCH_PHONE,
   FETCH_CATEGORIES_START,
   FETCH_CATEGORIES_SUCCESS,
-  FETCH_CATEGORIES_FAILURE, 
+  FETCH_CATEGORIES_FAILURE,
   CHANGE_GRID_SYSTEM,
-  REMOVE_ITEM_FROM_BASKET,  
+  REMOVE_ITEM_FROM_BASKET, 
+  CLEAN_BASKET,
 } from "./actionTypes"
 
 import {
@@ -165,6 +166,22 @@ export function removeItemFromBasket(id){
     })
   }
 }
+
+
+export function cleanBasket(){
+  return dispatch => {
+    dispatch({
+      type: CLEAN_BASKET
+    })
+  }
+}
+
+
+export function basketCheckout(phones){
+  return ()=> alert(JSON.stringify(phones))
+}
+
+
 
 
 export function changeGridSystem(){
