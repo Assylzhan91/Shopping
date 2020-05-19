@@ -1,0 +1,17 @@
+
+
+.item{
+  margin-top: 20px;
+  width: 100%; 
+  :global(.book-list){
+    padding-left: 30px !important;
+    padding-right: 30px !important;
+  }
+  :global(.thumbnail){
+    height: auto !important;
+    margin: auto;
+  }
+}
+
+
+
