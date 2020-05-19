@@ -1,6 +1,7 @@
 import React from 'react'
 import BasketCart from 'components/BasketCart'
 import Search from 'components/Search'
+import Categories from 'components/Categories'
 
 const Sidebar = props => {
   
@@ -8,6 +9,7 @@ const Sidebar = props => {
     <div>
       <BasketCart/> 
       <Search/> 
+      <Categories/> 
     </div>
   )
 }

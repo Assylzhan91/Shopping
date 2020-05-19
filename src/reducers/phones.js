@@ -6,12 +6,17 @@ import {
   FETCH_PHONE_BY_ID_SUCCESS,
   IS_RESIZE_MOBILE_WIDTH,
 } from "actions/actionTypes"
+import {CHANGE_GRID_SYSTEM} from "../actions/actionTypes";
 
 const initialState = {
-  isMobileWidth: false
+  isMobileWidth: false,
+  countArr: 3,
+  colMd9: 9,
+  colMd3: 3,
+  heightLinkPhone: false
 }
 
-export default (state = initialState, {type, payload})=>{
+export default (state = initialState, {type, payload, colMd9, colMd3,heightLinkPhone})=>{
   switch (type){
     case FETCH_PHONES_SUCCESS:
       let newValues = R.indexBy(R.prop('id'), payload)
@@ -28,6 +33,16 @@ export default (state = initialState, {type, payload})=>{
       return {
         ...state,
         isMobileWidth: payload
+      }
+      
+      case CHANGE_GRID_SYSTEM:
+       
+      return {
+        ...state,
+        countArr: payload,
+        colMd9,
+        colMd3,
+        heightLinkPhone
       }
     default: 
       return  state

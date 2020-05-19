@@ -128,7 +128,6 @@ const mapStateToProps = state =>{
   return {
     phone: getPhoneById(state, state.phonePageReducer.ids),
     tabletWidth: state.phones.isMobileWidth,
-    
   }
 }
 

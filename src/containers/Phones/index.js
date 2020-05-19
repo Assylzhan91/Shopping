@@ -6,29 +6,43 @@ import * as R from 'ramda'
 import {Row, Col, Button, Figure} from 'react-bootstrap'
 
 import style from './phones.module.scss'
+import classNames from 'classnames'
 
-import {fetchPhones, loadMorePhones, heightAuto, addPhoneToBasket} from "actions"
+import {
+  fetchPhones, 
+  loadMorePhones, 
+  heightAuto, 
+  addPhoneToBasket,
+  fetchCategories,
+  changeGridSystem
+} from "actions"
 import {getPhones} from "selectors/selectors"
 
 
 
 
 class  App extends  Component{
+  state = {
+    countArr: 3
+  }
 
   componentDidMount() {
     this.props.fetchPhones()
-    window.addEventListener('resize', ()=> this.props.heightAuto(575))
- 
-
+    this.props.fetchCategories()
+    window.addEventListener('resize', ()=> {
+      this.props.heightAuto(575)
+      this.props.changeGridSystem()
+    })
     this.props.heightAuto(575)
+    
   }
   
   renderPhone(phone, idx){
     const shortDecription = `${R.take(55, phone.description)}...`
-    const {addPhoneToBasket} = this.props
+    const {addPhoneToBasket, heightLinkPhone} = this.props
     
     return (
-    <Col md={4} lg={4} sm={4} className={`book-list d-flex flex-column`} key={idx}>
+    <div md={4} lg={4} sm={4} className={`book-list d-flex flex-column`} key={idx}>
         <Figure className={`thumbnail d-flex flex-column`}>
           <Figure.Image
             src={phone.image} 
@@ -37,8 +51,13 @@ class  App extends  Component{
           />
           <Figure.Caption>
             <h4 >${phone.price}</h4>
-            <h4>
-              <Link to={`/phones/${phone.id}`}>
+            <h4 >
+              <Link to={`/phones/${phone.id}`}
+                    style={{
+                      height:  heightLinkPhone ? '55px' : null,
+                      display: 'block'
+                    }}
+              >
                 {phone.name}
               </Link>
             </h4>
@@ -60,23 +79,39 @@ class  App extends  Component{
           </Figure.Caption>
           
         </Figure>
-      </Col>
+      </div>
     )
   }
   
   render() {
     let  {phones, loadMorePhones, isMobileWidth} = this.props
-    const cls = ['books']
-      if(isMobileWidth){
-        cls.push(style.item)
-      }
+    
+    const cls = classNames('books', {
+      [style.item]:  isMobileWidth
+    })
+      
+      
+    
+    const splitArr = (arr, chunks) =>
+    arr.reduce((acc, n, i) => ((acc[i % chunks] = acc[i % chunks] || []).push(n), acc), []);
+
+    const renderPhones =  splitArr(phones, this.props.countArr).map((subArr, sunIndex)=> {
+      
+      return (
+        <div className={cls} key={sunIndex}>
+          {
+            subArr.map((phone, idx)=> this.renderPhone(phone, idx))
+          }
+        </div>
+      )
+    })
+    
     return (
       <Layout>
-        <Row className={cls.join(' ')}>
-          {
-            phones.map((phone, idx)=> this.renderPhone(phone, idx))
-          }
-        </Row>
+        <h2>{this.props.countArr}</h2>
+        <div className='books-wrapper d-flex'>
+          {renderPhones}  
+        </div>
         <Row>
           <Col md={12}>
             <Button onClick={loadMorePhones}>
@@ -89,17 +124,21 @@ class  App extends  Component{
   }
 }
 
-const mapStateToProps = (state)=>{
+const mapStateToProps = (state, ownProps)=>{
   return { 
-    phones: getPhones(state),
-    isMobileWidth: state.phones.isMobileWidth
+    phones: getPhones(state, ownProps),
+    isMobileWidth: state.phones.isMobileWidth,
+    countArr: state.phones.countArr,
+    heightLinkPhone: state.phones.heightLinkPhone,
   }
 }
 const mapDispatchToProps = ({
   fetchPhones,
   loadMorePhones,
   heightAuto,
-  addPhoneToBasket
+  addPhoneToBasket,
+  fetchCategories,
+  changeGridSystem
 })
 
 

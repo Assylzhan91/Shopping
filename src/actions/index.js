@@ -10,14 +10,20 @@ import {
   FETCH_PHONE_BY_ID_FAILURE,
   IS_RESIZE_MOBILE_WIDTH,
   ADD_PHONE_TO_BASKET,
-  SEARCH_PHONE
+  SEARCH_PHONE,
+  FETCH_CATEGORIES_START,
+  FETCH_CATEGORIES_SUCCESS,
+  FETCH_CATEGORIES_FAILURE, 
+  CHANGE_GRID_SYSTEM,
+  REMOVE_ITEM_FROM_BASKET,  
 } from "./actionTypes"
 
 import {
   fetchPhones as fetchPhonesApi,
   loadMorePhones as loadMorePhonesApi,
   fetchPhoneById as fetchPhoneByIdApi,
-} from "mocks/index"
+  fetchCategories as fetchCategoriesApi
+} from "mocks"
 
 import {getRenderedPhonesLength} from "selectors/selectors"
 
@@ -124,3 +130,85 @@ export function searchPhone(value){
     dispatch({type: SEARCH_PHONE, payload: value})
   )
 }
+
+
+
+export function fetchCategories(){
+  return  async (dispatch)=>{
+    dispatch({
+      type: FETCH_CATEGORIES_START
+    })
+
+    try {
+      const categories = await fetchCategoriesApi()
+
+      dispatch({
+        type: FETCH_CATEGORIES_SUCCESS,
+        payload: categories
+      })
+    }
+    catch (err) {
+      dispatch({
+        type: FETCH_CATEGORIES_FAILURE,
+        payload: err,
+        isError: true
+      })
+    }
+  }
+}
+
+export function removeItemFromBasket(id){
+  return dispatch=>{
+    dispatch({
+      type: REMOVE_ITEM_FROM_BASKET,
+      payload: id
+    })
+  }
+}
+
+
+export function changeGridSystem(){
+  return (dispatch, ownProps) =>{
+    let colMd9 = ownProps().phones.colMd9
+    let colMd3 = ownProps().phones.colMd3
+    let heightLinkPhone = ownProps().phones.heightLinkPhone
+    
+
+    let countArr = 3
+    if(window.innerWidth < 1199 && window.innerWidth >= 575){
+      heightLinkPhone = true
+    }
+    else if(window.innerWidth <= 574){
+       heightLinkPhone = false
+    }
+    else{
+      heightLinkPhone = false
+    }
+    
+    if(window.innerWidth < 991 && window.innerWidth > 769){
+      countArr = 2
+      colMd9 = 8
+      colMd3 = 4
+    }
+   
+    else if(window.innerWidth >= 575 && window.innerWidth < 769){
+      countArr = 2
+    }
+    else if(window.innerWidth <= 574){
+      countArr = 1
+      colMd9 = 9
+      colMd3 = 3
+    }
+    else{
+      countArr = 3
+      colMd9 = 9
+      colMd3 = 3
+    }
+
+
+    dispatch({type: CHANGE_GRID_SYSTEM, payload: countArr, colMd9, colMd3, heightLinkPhone})
+  }
+}
+
+
+

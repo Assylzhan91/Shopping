@@ -101,6 +101,7 @@ html {
   flex-direction: column;
   height: 100%;
   max-height: 100%;
+  z-index: 10;
 }
 .book-list figure::before {
   position: absolute;
@@ -246,7 +247,6 @@ html {
   font-size: 34px;
 }
 .delete-cart{
-  background: url(/images/trash_16x16.gif) no-repeat 0 0;
   display: block;
   height: 16px;
   width: 16px;
@@ -254,23 +254,35 @@ html {
 .delete-cart:hover{
   cursor: pointer;
 }
+
+.books-wrapper{
+  margin: -1%;
+}
+
+.books{
+  margin: 1% 1% 0;
+}
+
 .books .book-list{
   margin-bottom: 20px;
-  
 }
 .well{
   border-radius: 0 0 4px 4px;
+}
+
+.well .input-group{
+  flex-wrap: nowrap;
 }
 
 .well input.form-control{
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
-.open>.dropdown-menu{
+.open > .dropdown-menu{
   min-width: 100%;
   z-index: 1001;
 }
-.open>.dropdown-menu > div,.open>.dropdown-menu{
+.open > .dropdown-menu > div, .open > .dropdown-menu{
   background-color: #f9f9f9;
   margin: 1px;
 }
@@ -304,9 +316,9 @@ html {
   border-top: none !important;
   text-align: center;
   vertical-align: middle !important;
+  vertical-align: middle !important;
 }
 .table-bordered{
-  border-collapse: separate;
   border-radius: 4px;
 }
 .total-user-checkout{

@@ -17,6 +17,7 @@ export const FETCH_PHONE_BY_ID_FAILURE = 'FETCH_PHONE_BY_ID_FAILURE'
 /*=========================================================================*/
 
 export const IS_RESIZE_MOBILE_WIDTH = 'IS_RESIZE_MOBILE_WIDTH'
+export const CHANGE_GRID_SYSTEM = 'CHANGE_GRID_SYSTEM'
 
 /*=========================================================================*/
 
@@ -28,6 +29,13 @@ export const SEARCH_PHONE = 'SEARCH_PHONE'
 
 /*=========================================================================*/
 
+export const FETCH_CATEGORIES_START = 'FETCH_CATEGORIES_START'
+export const FETCH_CATEGORIES_SUCCESS = 'FETCH_CATEGORIES_SUCCESS'
+export const FETCH_CATEGORIES_FAILURE = 'FETCH_CATEGORIES_FAILURE'
 
+/*=========================================================================*/
 
+export const REMOVE_ITEM_FROM_BASKET = 'REMOVE_ITEM_FROM_BASKET'
+
+/*=========================================================================*/
 

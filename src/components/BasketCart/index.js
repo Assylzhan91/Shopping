@@ -4,7 +4,7 @@ import {Icon} from '@blueprintjs/core'
 import {connect} from "react-redux"
 import {
   getTotalBasketCount,
-  getTotalPrice
+  getTotalBasketPrice
 } from "selectors/selectors"
 
 
@@ -32,7 +32,7 @@ const BasketCart = ({totalBasketCount, totalPrice}) => {
 const mapStateToProps = state=>{
   return {
     totalBasketCount: getTotalBasketCount(state),
-    totalPrice: getTotalPrice(state),
+    totalPrice: getTotalBasketPrice(state),
   }
 }
 

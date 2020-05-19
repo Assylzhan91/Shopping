@@ -24,7 +24,7 @@ class Search extends Component {
     return (
       <div className='well blosd'>
         <h3 className=''>Quick shop</h3>
-        <InputGroup className="mb-3">
+        <InputGroup className="mb-3 ">
           <Form onSubmit={this.handleSubmit}>
             <FormControl
               placeholder="Search"
